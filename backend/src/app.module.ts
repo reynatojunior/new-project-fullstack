@@ -18,11 +18,11 @@ import { Produto } from './produtos/entities/produto.entity';
         type: 'mysql',
         host: configService.get('DB_HOST'),
         port: +configService.get('DB_PORT'),
-        username: configService.get('DB_USER'), // Note que no .env é DB_USER não DB_USERNAME
-        password: configService.get('DB_PASS'), // Note que no .env é DB_PASS não DB_PASSWORD
-        database: configService.get('DB_NAME'), // Note que no .env é DB_NAME não DB_DATABASE
+        username: configService.get('DB_USER'), 
+        password: configService.get('DB_PASS'), 
+        database: configService.get('DB_NAME'), 
         entities: [Produto],
-        synchronize: configService.get('NODE_ENV') === 'development', // Sincroniza apenas em desenvolvimento
+        synchronize: configService.get('NODE_ENV') === 'development', 
       }),
     }),
     ProdutosModule,
