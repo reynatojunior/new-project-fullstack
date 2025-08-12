@@ -1,0 +1,67 @@
+<div class="container">
+  <h2>Lista de Produtos</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Preço</th>
+        
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let produto of produtos">
+        <td>{{ produto.id }}</td>
+        <td>{{ produto.nome }}</td>
+        <td>{{ produto.preco | currency:'BRL' }}</td>
+        
+        <td>
+          <button (click)="selecionarProduto(produto.id!)" class="btn-edit">Editar</button>
+          <button (click)="deletarProduto(produto.id!)" class="btn-delete">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="form-container">
+    <h3>{{ produtoSelecionado ? 'Editar Produto' : 'Criar Novo Produto' }}</h3>
+    <form (submit)="salvarProduto()">
+      <div class="form-group">
+        <label>Nome:</label>
+        <input 
+          type="text"
+          [ngModel]="produtoSelecionado ? produtoSelecionado.nome : novoProduto.nome"
+          (ngModelChange)="produtoSelecionado ? produtoSelecionado.nome = $event : novoProduto.nome = $event"
+          name="nome" 
+          required
+        >
+      </div>
+      <div class="form-group">
+        <label>Preço:</label>
+        <input 
+          type="number" 
+          step="0.01" 
+          [ngModel]="produtoSelecionado ? produtoSelecionado.preco : novoProduto.preco"
+          (ngModelChange)="produtoSelecionado ? produtoSelecionado.preco = $event : novoProduto.preco = $event"
+
+          name="preco" 
+          required
+        >
+      </div>
+      
+      <button type="submit" class="btn-save">
+        {{ produtoSelecionado ? 'Atualizar' : 'Salvar' }}
+      </button>
+      <button 
+        *ngIf="produtoSelecionado" 
+        type="button" 
+        (click)="produtoSelecionado = null" 
+        class="btn-cancel"
+      >
+        Cancelar
+      </button>
+    </form>
+  </div>
+</div>
